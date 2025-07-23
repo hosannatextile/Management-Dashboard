@@ -5,7 +5,7 @@ FROM cirrusci/flutter:stable-web
 WORKDIR /app
 
 # Copy pubspec files and get dependencies
-COPY pubspec.yaml pubspec.lock ./
+
 RUN flutter pub get
 
 # Copy rest of the app
