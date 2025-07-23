@@ -1,24 +1,34 @@
-# Use the official Flutter image with web support
-FROM cirrusci/flutter:stable-web
+# -------- Stage 1: Build Flutter Web --------
+FROM cirrusci/flutter:stable-web as builder
 
 # Set working directory
 WORKDIR /app
 
-# Copy pubspec files and get dependencies
+# Only copy pubspec files first (improves caching)
+COPY pubspec.yaml pubspec.lock ./
 
+# Get dependencies
 RUN flutter pub get
 
-# Copy rest of the app
+# Copy the rest of the project
 COPY . .
 
-# Build Flutter web
+# Build the web app in release mode
 RUN flutter build web --release
 
-# Use a lightweight web server to serve the app (e.g., nginx or shelf_static)
+# -------- Stage 2: Serve with NGINX --------
 FROM nginx:alpine
-COPY --from=0 /app/build/web /usr/share/nginx/html
+
+# Remove default nginx static files
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy built Flutter web app from builder
+COPY --from=builder /app/build/web /usr/share/nginx/html
+
+# Optional: copy a custom nginx.conf if you want to fine-tune caching, routes, etc.
+# COPY nginx.conf /etc/nginx/nginx.conf
 
 
 
-# Start nginx
+# Start nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]
