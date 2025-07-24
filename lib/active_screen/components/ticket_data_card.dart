@@ -49,11 +49,7 @@ class TicketDataCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          Column(children: [
-          
-            Text(role,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-
-          ],),
+          Text(role,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
           media.voiceNoteUrl==null?Container():  Icon(Icons.play_arrow),
                media.imageUrl==null?Container(): Icon(Icons.image),
           Container(
@@ -66,9 +62,7 @@ class TicketDataCard extends StatelessWidget {
             child: Expanded(child: Text(priority,overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.white),))),
         ]),
         
-              Row(children: [
              
-              ],)
     ],),);
   }
   
