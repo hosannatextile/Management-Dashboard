@@ -50,8 +50,8 @@ class TicketDataCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
           Text(role,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-          media.voiceNoteUrl==null?Container():  Icon(Icons.play_arrow),
-               media.imageUrl==null?Container(): Icon(Icons.image),
+          media.voiceNoteUrl==null?SizedBox():  Icon(Icons.play_arrow),
+               media.imageUrl==null?SizedBox(): Icon(Icons.image),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
             decoration: BoxDecoration(color:  priority == "Very Urgent"
@@ -59,7 +59,7 @@ class TicketDataCard extends StatelessWidget {
                           : priority == "Urgent"
                           ? Colors.purple
                           : Colors.blue ,borderRadius: BorderRadius.circular(10)),
-            child: Expanded(child: Text(priority,overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.white),))),
+            child: Text(priority,overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.white),)),
         ]),
         
              
