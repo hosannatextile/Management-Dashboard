@@ -83,7 +83,7 @@ class _RejectionScreenState extends State<RejectionScreen> {
               ),
             ),
              Obx(()=>
-            ticketController.rejectedTicketList.value.ticketDetails==null ?Expanded(child: Center(child: Text("No Data",style: TextStyle(color: Colors.white),),)):
+            ticketController.rejectedTicketList.value.ticketDetails==null ?Center(child: Text("No Data",style: TextStyle(color: Colors.white),),):
              ListView.builder(
               shrinkWrap: true,
               itemCount: ticketController.rejectedTicketList.value.ticketDetails!.length,

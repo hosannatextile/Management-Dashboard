@@ -73,7 +73,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
               ),
             ),
             Obx(()=>
-            ticketController.trainingList.value.ticketDetails==null ?Expanded(child: Center(child: Text("No Data",style: TextStyle(color: Colors.white),),)):
+            ticketController.trainingList.value.ticketDetails==null ?Center(child: Text("No Data",style: TextStyle(color: Colors.white),),):
             ListView.builder(
               shrinkWrap: true,
               itemCount: ticketController.trainingList.value.ticketDetails?.length,
