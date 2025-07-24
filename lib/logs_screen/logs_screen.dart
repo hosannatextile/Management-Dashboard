@@ -18,6 +18,9 @@ class _LogsScreenState extends State<LogsScreen> {
   getData() async {
    await ApiHelper().getUsersByRole("Admin").then((value) => setState(() => adminList = jsonDecode(value.body)));
    await ApiHelper().getUsersByRole("Incharge").then((value) => setState(() => inchargeList = jsonDecode(value.body)));
+   setState(() {
+     
+   });
   }
   
   @override
@@ -47,7 +50,7 @@ class _LogsScreenState extends State<LogsScreen> {
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height - 100, // Constrain height
-                    child: ListView.builder(
+                    child:inchargeList.isEmpty ? const Center(child: Text("No logs")): ListView.builder(
                       shrinkWrap: true,
                       itemCount: inchargeList.length,
                       itemBuilder: (context, index) {
@@ -77,7 +80,7 @@ class _LogsScreenState extends State<LogsScreen> {
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height - 100, // Constrain height
-                    child: ListView.builder(
+                    child:adminList.isEmpty ? const Center(child: Text("No logs")): ListView.builder(
                       shrinkWrap: true,
                       itemCount: adminList.length,
                       itemBuilder: (context, index) {

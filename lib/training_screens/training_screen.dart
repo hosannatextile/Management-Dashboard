@@ -72,9 +72,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 ),
               ),
             ),
+            Obx(()=>
+            ticketController.trainingList.value.ticketDetails==null ?Expanded(child: Center(child: Text("No Data",style: TextStyle(color: Colors.white),),)):
             ListView.builder(
               shrinkWrap: true,
-              itemCount: ticketController.trainingList.value.ticketDetails!.length,
+              itemCount: ticketController.trainingList.value.ticketDetails?.length,
               itemBuilder: (context, index) {
                 return Card(
                   color: Colors.grey.shade800,
@@ -104,6 +106,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                   ),
                 );
               },
+            ),
             ),
         ],
       )

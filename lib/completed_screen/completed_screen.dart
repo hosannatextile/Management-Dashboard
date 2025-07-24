@@ -80,7 +80,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
             ),
               SizedBox(height: 8),
              Obx(()=>
-            ticketController.completedTicketList.value.ticketDetails==null ?Expanded(child: Center(child: Text("No Data"),)):
+            ticketController.completedTicketList.value.ticketDetails==null ?Expanded(child: Center(child: Text("No Data",style: TextStyle(color: Colors.white),),)):
              ListView.builder(
               shrinkWrap: true,
               itemCount: ticketController.completedTicketList.value.ticketDetails!.length,

@@ -71,7 +71,7 @@ class _ReimbursementScreenState extends State<ReimbursementScreen> {
               ),
             ),
             Obx(()=>
-            ticketController.reimbursementList.value.ticketDetails==null ?Expanded(child: Center(child: CircularProgressIndicator(),)):
+            ticketController.reimbursementList.value.ticketDetails==null ?Expanded(child: Center(child: Text("No Data",style: TextStyle(color: Colors.white),),)):
              ListView.builder(
               shrinkWrap: true,
               itemCount: ticketController.reimbursementList.value.ticketDetails!.length,
