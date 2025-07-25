@@ -41,7 +41,7 @@ class _RequirementScreenCardState extends State<RequirementScreenCard> {
            Expanded(
   child: Obx(() {
     final ticketData = ticketController.requirementList.value;
-
+    
     if (ticketData == null ||
         ticketData.ticketDetails == null ||
         ticketData.ticketDetails!.isEmpty) {

@@ -43,7 +43,7 @@ class _ComplaintScreenCardState extends State<ComplaintScreenCard> {
               "(${ticketController.complaintsList.value?.ticketDetails?.length ?? 0}) Complaints",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: MediaQuery.of(context).size.width * 0.02,
+                fontSize: 25,
               ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,

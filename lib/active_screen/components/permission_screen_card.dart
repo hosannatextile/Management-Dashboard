@@ -41,7 +41,7 @@ class _PermissionScreenCardState extends State<PermissionScreenCard> {
            Expanded(
   child: Obx(() {
     final ticketData = ticketController.permissionList.value;
-
+    
     if (ticketData == null ||
         ticketData.ticketDetails == null ||
         ticketData.ticketDetails!.isEmpty) {

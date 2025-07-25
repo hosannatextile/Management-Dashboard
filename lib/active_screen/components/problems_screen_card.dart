@@ -41,7 +41,7 @@ class _ProblemScreenCardState extends State<ProblemScreenCard> {
            Expanded(
   child: Obx(() {
     final ticketData = ticketController.problemList.value;
-
+    
     if (ticketData == null ||
         ticketData.ticketDetails == null ||
         ticketData.ticketDetails!.isEmpty) {
