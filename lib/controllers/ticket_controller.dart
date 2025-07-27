@@ -12,6 +12,7 @@ class TicketController extends GetxController{
   RxBool loadingProblems = false.obs;
   RxBool loadingPermissions = false.obs;
   RxBool loadingRequirements = false.obs;
+    RxBool loadingAllTickets = false.obs;
    Rx<TicketsCompleteData> complaintsList = TicketsCompleteData().obs;
   Rx<TicketsCompleteData> problemList = TicketsCompleteData().obs;
   Rx<TicketsCompleteData> permissionList = TicketsCompleteData().obs;
@@ -21,6 +22,8 @@ class TicketController extends GetxController{
    Rx<TicketsCompleteData> assignedTicketList=TicketsCompleteData().obs;
   Rx<TicketsCompleteData> completedTicketList=TicketsCompleteData().obs;
   Rx<TicketsCompleteData> rejectedTicketList=TicketsCompleteData().obs;
+  Rx<TicketsCompleteData> respondedTicketList=TicketsCompleteData().obs;
+   Rx<TicketsCompleteData> allTicketsList =TicketsCompleteData().obs;
   getAllTickets(){
     getAllComplaints();
     getAllPermissions();
@@ -30,7 +33,28 @@ class TicketController extends GetxController{
     getAllReimbursement();
     getCompletedTicket();
     getRejectedTicket();
+    getRespondedTickets();
     update();
+  }
+  getRespondedTickets() async {
+    loadingAllTickets.value = true;
+    var response = await TicketApi().getTicketByRecipientIdnStatus(
+      "",""
+    );
+    if (response.statusCode == 200) {
+      loadingAllTickets.value = false;
+      var data = TicketsCompleteData.fromJson(jsonDecode(response.body));
+      // Reverse the ticketDetails list to show newest first
+      if (data.ticketDetails != null) {
+        data.ticketDetails = data.ticketDetails!.reversed.where((x) => x.ticket!.status != "Active" && x.ticket!.status != "Pending"  ).toList();
+      }
+      allTicketsList.value = data;
+      // complaintsList.value = TicketsCompleteData.fromJson(jsonDecode(response.body));
+      update();
+      print(allTicketsList().count);
+    }else{
+      loadingAllTickets .value= false;
+    }
   }
 // RxList<Ticket> complaintsTicketList=<Ticket>[].obs;
 //   RxList<Ticket> requirementsTicketList=<Ticket>[].obs;
@@ -64,7 +88,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       complaintsList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      complaintsList.value.ticketDetails=complaintsList.value.ticketDetails!.reversed.toList().obs;
+      complaintsList.value.ticketDetails=complaintsList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
       loadingComplaints.value = false;
       print(complaintsList().count);
     }
@@ -76,7 +100,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       permissionList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      permissionList.value.ticketDetails=permissionList.value.ticketDetails!.reversed.toList().obs;
+      permissionList.value.ticketDetails=permissionList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
       loadingPermissions.value = false;
       print(permissionList().count);
     }
@@ -88,7 +112,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       problemList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      problemList.value.ticketDetails=problemList.value.ticketDetails!.reversed.toList().obs;
+      problemList.value.ticketDetails=problemList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
       loadingProblems.value = false;
       print(problemList().count);
     }
@@ -100,7 +124,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       requirementList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      requirementList.value.ticketDetails=requirementList.value.ticketDetails!.reversed.toList().obs;
+      requirementList.value.ticketDetails=requirementList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
       loadingRequirements.value = false;
       print(requirementList().count);
     }
@@ -111,7 +135,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       trainingList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      trainingList.value.ticketDetails=trainingList.value.ticketDetails!.reversed.toList().obs;
+      trainingList.value.ticketDetails=trainingList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
       print(trainingList().count);
     }
   }
@@ -121,7 +145,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       reimbursementList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      reimbursementList.value.ticketDetails=reimbursementList.value.ticketDetails!.reversed.toList().obs;
+      reimbursementList.value.ticketDetails=reimbursementList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
       print(reimbursementList().count);
     }
   }
@@ -150,6 +174,20 @@ getAllComplaints() async {
      rejectedTicketList = TicketsCompleteData.fromJson(jsonDecode(res.body)).obs;
       rejectedTicketList.value.ticketDetails=rejectedTicketList.value.ticketDetails!.reversed.toList().obs;
       print(rejectedTicketList().count);
+    } else {
+      print("Failed to load tickets");
+    }
+  }
+  
+  getRespondedTicket() async {
+    var res = await TicketApi().getTicketByRecipientIdnStatus("", "Responded");
+    if (res.statusCode == 200) {
+      print(res.body);
+
+   
+     respondedTicketList = TicketsCompleteData.fromJson(jsonDecode(res.body)).obs;
+      respondedTicketList.value.ticketDetails=respondedTicketList.value.ticketDetails!.reversed.toList().obs;
+      print(respondedTicketList().count);
     } else {
       print("Failed to load tickets");
     }

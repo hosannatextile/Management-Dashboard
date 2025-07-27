@@ -18,6 +18,7 @@ import 'package:help_desk_hosanna/logs_screen/logs_screen.dart';
 import 'package:help_desk_hosanna/pending_screen/pending_screen.dart';
 import 'package:help_desk_hosanna/reimbursement_screen/reimbursement_screen.dart';
 import 'package:help_desk_hosanna/rejection_screen/rejection_screen.dart';
+import 'package:help_desk_hosanna/reponded_screen/responded_screen.dart';
 import 'package:help_desk_hosanna/training_screens/training_screen.dart';
 import 'package:intl/intl.dart';
 class HelpDeskScreen extends StatefulWidget {
@@ -97,7 +98,7 @@ String _getFormattedDate() {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 7,
+      length: 8,
       child: Scaffold(
          backgroundColor: Colors.grey.shade900,
         appBar: AppBar(
@@ -176,27 +177,40 @@ String _getFormattedDate() {
                       showBadge: false,
                       badgeContent: Text('3'),
                       child: Tab(text: "Active")),
-                    
+                    Obx(()=>
                      badges.Badge(
-                      showBadge: false,
-                      badgeContent: Text('3'),
+                      showBadge: ticketController.allTicketsList.value.ticketDetails?.length!=0? true:false,
+                      badgeContent: Text('${ticketController.allTicketsList.value.ticketDetails?.length??0}'),
+                      child: Tab(text: "Responded")),
+                    ),
+                    Obx(()=>
+                     badges.Badge(
+                      showBadge: ticketController.completedTicketList.value.ticketDetails?.length!=0? true:false,
+                      badgeContent: Text('${ticketController.completedTicketList.value.ticketDetails?.length??0}'),
                       child: Tab(text: "Completed")),
+                    ),
                      badges.Badge(
                       showBadge: false,
                       badgeContent: Text('3'),
                       child: Tab(text: "Pending")),
+                      Obx(()=>
                      badges.Badge(
-                      showBadge: false,
-                      badgeContent: Text('3'),
+                      showBadge: ticketController.rejectedTicketList.value.ticketDetails?.length!=0? true:false,
+                      badgeContent: Text('${ticketController.rejectedTicketList.value.ticketDetails?.length??0}'),
                       child: Tab(text: "Rejection")),
+                      ),
+                      Obx(()=>
                      badges.Badge(
-                      showBadge: false,
-                      badgeContent: Text('3'),
+                      showBadge:ticketController.trainingList.value.ticketDetails?.length!=0? true:false,
+                      badgeContent: Text('${ticketController.trainingList.value.ticketDetails?.length??0}'),
                       child: Tab(text: "Training")),
+                      ),
+                      Obx(()=>
                      badges.Badge(
-                      showBadge: false,
-                      badgeContent: Text('3'),
+                      showBadge: ticketController.reimbursementList.value.ticketDetails?.length!=0? true:false,
+                      badgeContent: Text('${ticketController.reimbursementList.value.ticketDetails?.length??0}'),
                       child: Tab(text: "Reimbursements")),
+                      ),
                      badges.Badge(
                       showBadge: false,
                       badgeContent: Text('3'),
@@ -211,7 +225,7 @@ String _getFormattedDate() {
               child: TabBarView(
                         children: [
                       ActiveScreen(),
-                        
+                        RespondedScreen(),
                           CompletedScreen(),
                           PendingScreen(),
                            RejectionScreen(),
