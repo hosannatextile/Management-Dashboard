@@ -189,10 +189,10 @@ String _getFormattedDate() {
                       badgeContent: Text('${ticketController.completedTicketList.value.ticketDetails?.length??0}'),
                       child: Tab(text: "Completed")),
                     ),
-                     badges.Badge(
-                      showBadge: false,
-                      badgeContent: Text('3'),
-                      child: Tab(text: "Pending")),
+                    //  badges.Badge(
+                    //   showBadge: false,
+                    //   badgeContent: Text('3'),
+                    //   child: Tab(text: "Pending")),
                       Obx(()=>
                      badges.Badge(
                       showBadge: ticketController.rejectedTicketList.value.ticketDetails?.length!=0? true:false,
@@ -227,7 +227,7 @@ String _getFormattedDate() {
                       ActiveScreen(),
                         RespondedScreen(),
                           CompletedScreen(),
-                          PendingScreen(),
+                          // PendingScreen(),
                            RejectionScreen(),
                             TrainingScreen(),
                              ReimbursementScreen(),
