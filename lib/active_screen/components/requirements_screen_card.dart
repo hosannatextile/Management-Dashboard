@@ -57,14 +57,17 @@ class _RequirementScreenCardState extends State<RequirementScreenCard> {
           final ticket = ticketData.ticketDetails![index];
           if (ticket.ticket == null) return const SizedBox.shrink();
 
-          return TicketDataCard(
-            name: ticket.sender?.fullName ?? "No Name",
-            role: ticket.sender?.role ?? "Unknown",
-            date: ticket.ticket?.createdAt?.split("T").first ?? "",
-            priority: ticket.ticket?.priority ?? "",
-            media:ticket.ticket!.media!,
-            profilePhoto: ticket.sender?.profilePhoto ?? "",
-          
+          return Tooltip(
+             message: "Please check on the App",
+            child: TicketDataCard(
+              name: ticket.sender?.fullName ?? "No Name",
+              role: ticket.sender?.role ?? "Unknown",
+              date: ticket.ticket?.createdAt?.split("T").first ?? "",
+              priority: ticket.ticket?.priority ?? "",
+              media:ticket.ticket!.media!,
+              profilePhoto: ticket.sender?.profilePhoto ?? "",
+            
+            ),
           );
         },
       ),

@@ -33,20 +33,20 @@ class _TrainingScreenState extends State<TrainingScreen> {
                       flex: 2, // <- bigger/smaller numbers tweak width
                       child: Text(
                         'Title',
-                        style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                        style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow),
                       ),
                     ),
 
                     // ───────── column 1 ─────────
                     Expanded(
                       flex: 3,
-                      child: Text("Type",style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+                      child: Text("Type",style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow)),
                     ),
 
                     // ───────── column 2 ─────────
                     Expanded(
                       flex: 3,
-                      child: Text('Priority',style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+                      child: Text('Priority',style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow)),
                     ),
 
                     // ───────── column 3 ─────────
@@ -56,7 +56,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                         'Incharge Name',
                         textAlign: TextAlign
                             .start, 
-                            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white)// right-align last column if you like
+                            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow)// right-align last column if you like
                       ),
                     ),
                     Expanded(
@@ -65,7 +65,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                         'Date',
                         textAlign: TextAlign
                             .center, // right-align last column if you like
-                            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white)
+                            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow)
                       ),
                     ),
                   ],
@@ -79,7 +79,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
               itemCount: ticketController.trainingList.value.ticketDetails?.length,
               itemBuilder: (context, index) {
                 return Card(
-                  color: Colors.grey.shade800,
+                  color: Colors.grey.shade700,
                   margin: EdgeInsets.all(8),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),

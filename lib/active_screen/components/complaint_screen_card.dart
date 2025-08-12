@@ -66,13 +66,17 @@ class _ComplaintScreenCardState extends State<ComplaintScreenCard> {
                       final ticket = ticketData.ticketDetails![index];
                       if (ticket.ticket == null) return const SizedBox.shrink();
 
-                      return TicketDataCard(
-                        name: ticket.sender?.fullName ?? "No Name",
-                        role: ticket.sender?.role ?? "Unknown",
-                        date: ticket.ticket?.createdAt?.split("T").first ?? "",
-                        priority: ticket.ticket?.priority ?? "N/A",
-                        media: ticket.ticket?.media??Media(),
-                        profilePhoto: ticket.sender?.profilePhoto ?? "",
+                      return Tooltip(
+                        message: "Please check on the App",
+                        textStyle: TextStyle(fontSize: 20),
+                        child: TicketDataCard(
+                          name: ticket.sender?.fullName ?? "No Name",
+                          role: ticket.sender?.role ?? "Unknown",
+                          date: ticket.ticket?.createdAt?.split("T").first ?? "",
+                          priority: ticket.ticket?.priority ?? "N/A",
+                          media: ticket.ticket?.media??Media(),
+                          profilePhoto: ticket.sender?.profilePhoto ?? "",
+                        ),
                       );
                     },
                   ),

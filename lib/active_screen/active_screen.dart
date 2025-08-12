@@ -35,7 +35,7 @@ class _ActiveScreenState extends State<ActiveScreen> {
       Obx(()=> ticketController.loadingRequirements.value ?Expanded(child: Center(child: CircularProgressIndicator(),)): RequirementScreenCard(background: Colors.blue,title: "Requirements (2)",),),
      Obx(()=> ticketController.loadingPermissions.value ?Expanded(child: Center(child: CircularProgressIndicator(),)):  PermissionScreenCard(background: Colors.green,title: "Permissions (2)",),),
       Obx(()=>ticketController.loadingProblems.value ?Expanded(child: Center(child: CircularProgressIndicator(),)):  ProblemScreenCard(background: Colors.red,title: "Problems (2)",),),
-         AdminActivityScreenCard(background: Colors.purple,title: "Admin Activity",),
+        //  AdminActivityScreenCard(background: Colors.purple,title: "Admin Activity",),
       ]),
     );
   }
