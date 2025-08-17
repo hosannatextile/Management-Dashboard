@@ -38,7 +38,7 @@ class _PendingScreenState extends State<PendingScreen> {
                     Expanded(
                       flex: 3, // <- bigger/smaller numbers tweak width
                       child: Text(
-                        'Title',
+                        'Management Description',
                         style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow),
                       ),
                     ),
@@ -69,6 +69,24 @@ class _PendingScreenState extends State<PendingScreen> {
                       flex: 3,
                       child: Text(
                         'Status',
+                        textAlign: TextAlign
+                            .start, // right-align last column if you like
+                            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow)
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        'Type',
+                        textAlign: TextAlign
+                            .start, // right-align last column if you like
+                            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow)
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        'Incharge Description',
                         textAlign: TextAlign
                             .start, // right-align last column if you like
                             style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.yellow)
@@ -158,6 +176,20 @@ class _PendingScreenState extends State<PendingScreen> {
                         flex: 3,
                         child: Text(
                           assignment.status ?? '',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          assignment.ticketId["type"] ?? '',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          assignment.ticketId["description"] ?? '',
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),

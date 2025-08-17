@@ -21,6 +21,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  bool obscureText = true;
   TextEditingController reasonController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -134,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: TextFormField(
              controller: passwordController,
               style: TextStyle(color: Colors.white), 
-              obscureText: true,
+              obscureText: obscureText,
               decoration: InputDecoration(
                   hintText: "Enter your password",
                   labelText: "Password",
@@ -145,10 +146,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     horizontal: 24,
                     vertical: 16,
                   ),
-                  suffix: SvgPicture.string(
-                    lockIcon,
-                    color: Colors.white,
-                  ),
+                  suffixIcon: IconButton(
+                                icon: Icon(
+                                  obscureText ? Icons.visibility_off : Icons.visibility,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    obscureText = !obscureText;
+                                  });
+                                },
+                              ),
                   border: authOutlineInputBorder,
                   enabledBorder: authOutlineInputBorder,
                   focusedBorder: authOutlineInputBorder.copyWith(

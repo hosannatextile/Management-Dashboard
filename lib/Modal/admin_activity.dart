@@ -1,3 +1,5 @@
+
+
 class AdminActivity {
   String? sId;
   String? fullName;
@@ -36,7 +38,7 @@ class AdminActivity {
 
 class Assignments {
   String? sId;
-  String? ticketId;
+  dynamic ticketId;
   UserId? userId;
   // List<AssignTo>? assignTo;
   String? details;

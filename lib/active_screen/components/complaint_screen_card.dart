@@ -76,6 +76,7 @@ class _ComplaintScreenCardState extends State<ComplaintScreenCard> {
                           priority: ticket.ticket?.priority ?? "N/A",
                           media: ticket.ticket?.media??Media(),
                           profilePhoto: ticket.sender?.profilePhoto ?? "",
+                          ticketId: ticket.ticket?.sId ?? "",
                         ),
                       );
                     },

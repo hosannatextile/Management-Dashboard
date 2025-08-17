@@ -65,7 +65,7 @@ class _PermissionScreenCardState extends State<PermissionScreenCard> {
               priority: ticket.ticket?.priority ?? "N/A",
               media:ticket.ticket!.media!,
               profilePhoto: ticket.sender?.profilePhoto ?? "",
-             
+             ticketId: ticket.ticket!.sId!,
             ),
           );
         },

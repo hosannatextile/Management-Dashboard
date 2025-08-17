@@ -66,7 +66,7 @@ class _RequirementScreenCardState extends State<RequirementScreenCard> {
               priority: ticket.ticket?.priority ?? "",
               media:ticket.ticket!.media!,
               profilePhoto: ticket.sender?.profilePhoto ?? "",
-            
+            ticketId: ticket.ticket!.sId!,
             ),
           );
         },

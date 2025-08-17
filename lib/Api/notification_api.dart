@@ -29,4 +29,36 @@ class NotificationApi {
     return response;
   }
 
+Future<http.Response> fetchReminders(String ticketId) async {
+  final url = Uri.parse('${ApiConstant.baseUrl}remind/reminders/$ticketId'); // Replace with actual API base URL
+
+  try {
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json',
+      "Authorization": "Bearer ${ApiConstant.loginData!.accessToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print(response.body);
+      print('Reminders for ${data['ticket_id']}:');
+      for (var reminder in data['reminders']) {
+        print('Ticket: ${reminder['ticket']['description']} | Status: ${reminder['ticket']['status']}');
+        print('From: ${reminder['user_id']['name']} | Count: ${reminder['count']}');
+        print('---');
+      }
+      return response;
+    } else {
+      final errorData = jsonDecode(response.body);
+
+      print('Error: ${errorData['error']}');
+      return response;
+    }
+  } catch (e) {
+    print('Exception occurred: $e');
+    return http.Response('Error', 500);
+  }
+}
 }

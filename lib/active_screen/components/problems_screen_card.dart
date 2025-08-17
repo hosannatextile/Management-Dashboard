@@ -65,7 +65,7 @@ class _ProblemScreenCardState extends State<ProblemScreenCard> {
               priority: ticket.ticket?.priority ?? "Unknown",
               media:ticket.ticket!.media!,
               profilePhoto: ticket.sender?.profilePhoto ?? "",
-                     
+                     ticketId: ticket.ticket!.sId!,
             ),
           );
         },
