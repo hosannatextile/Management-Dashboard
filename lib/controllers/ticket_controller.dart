@@ -5,6 +5,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:help_desk_hosanna/Api/api.dart';
 import 'package:help_desk_hosanna/Api/api_constant.dart';
 import 'package:help_desk_hosanna/Api/ticket_api.dart';
+import 'package:help_desk_hosanna/Modal/admin_activity.dart';
 import 'package:help_desk_hosanna/Modal/tickets_complete_data.dart';
 import 'package:http/http.dart' as http;
 class TicketController extends GetxController{
@@ -24,6 +25,8 @@ class TicketController extends GetxController{
   Rx<TicketsCompleteData> rejectedTicketList=TicketsCompleteData().obs;
   Rx<TicketsCompleteData> respondedTicketList=TicketsCompleteData().obs;
    Rx<TicketsCompleteData> allTicketsList =TicketsCompleteData().obs;
+   RxList<AdminActivity> adminActivity =<AdminActivity>[].obs;
+
   getAllTickets(){
     getAllComplaints();
     getAllPermissions();
@@ -193,5 +196,11 @@ getAllComplaints() async {
     }
   }
 
+  getAdminActivity() async {
+    var res = await TicketApi().getAdminActivity();
+    if (res.statusCode == 200) {
+    adminActivity.value=jsonDecode(res.body)["data"].map<AdminActivity>((json) => AdminActivity.fromJson(json)).toList();
+    }
+  }
   
 }

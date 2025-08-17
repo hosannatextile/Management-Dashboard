@@ -208,4 +208,35 @@ Future<Map<String, dynamic>> getRecipientTickets({
 }
 
 
+Future<http.Response> getAdminActivity() async {
+  final queryParameters = <String, String>{};
+
+ 
+
+   Uri url = Uri.parse("${ApiConstant.baseUrl}assign/admin-assignments")
+      .replace(queryParameters: queryParameters);
+
+  try {
+    final response = await http.get(
+      url,
+      // Optional: Add headers if needed
+       headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+       }
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      return response;
+    } else if (response.statusCode == 404) {
+      return response;
+    } else {
+      return response;
+    }
+  } catch (e) {
+    throw Exception('Error: $e');
+  }
+}
+
+
 }

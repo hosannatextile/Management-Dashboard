@@ -23,6 +23,8 @@ class _ActiveScreenState extends State<ActiveScreen> {
     // TODO: implement initState
     super.initState();
     ticketController.getAllTickets();
+    ticketController.getAdminActivity();
+
   }
   @override
   Widget build(BuildContext context) {
