@@ -20,6 +20,7 @@ class TicketController extends GetxController{
   Rx<TicketsCompleteData> requirementList = TicketsCompleteData().obs;
   Rx<TicketsCompleteData> trainingList = TicketsCompleteData().obs;
   Rx<TicketsCompleteData> reimbursementList =TicketsCompleteData().obs;
+  Rx<TicketsCompleteData> knowledgeList =TicketsCompleteData().obs;
    Rx<TicketsCompleteData> assignedTicketList=TicketsCompleteData().obs;
   Rx<TicketsCompleteData> completedTicketList=TicketsCompleteData().obs;
   Rx<TicketsCompleteData> rejectedTicketList=TicketsCompleteData().obs;
@@ -37,6 +38,7 @@ class TicketController extends GetxController{
     getCompletedTicket();
     getRejectedTicket();
     getRespondedTickets();
+    getAllKnowledge();
     update();
   }
   getRespondedTickets() async {
@@ -152,6 +154,16 @@ getAllComplaints() async {
       print(reimbursementList().count);
     }
   }
+  getAllKnowledge() async {
+    var response = await TicketApi().getTicketByRecipientIdnStatus(
+      "Knowledge",""
+    );
+    if (response.statusCode == 200) {
+      knowledgeList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
+      knowledgeList.value.ticketDetails=knowledgeList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Seen").toList().obs;
+      print(reimbursementList().count);
+    }
+  }
   
   getCompletedTicket() async {
     var res = await TicketApi().getTicketByRecipientIdnStatus("", "completed");
@@ -202,5 +214,9 @@ getAllComplaints() async {
     adminActivity.value=jsonDecode(res.body)["data"].map<AdminActivity>((json) => AdminActivity.fromJson(json)).toList();
     }
   }
-  
+  updateTicketStatus(String ticketId,String userId,String recipientId,String status)async{
+
+  var res=await TicketApi().updateTicketStatus(ticketId: ticketId, userId: userId, recipientId: recipientId, status: status);
+    // homeController.getTicketsDetails();
+}
 }

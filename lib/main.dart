@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   runApp(MyApp());
 }
-
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
     splitScreenMode: true, // optional, but recommended
     builder: (context, child) {
     return MaterialApp(
+      
+        navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

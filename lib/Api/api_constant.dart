@@ -22,6 +22,7 @@ class ApiConstant {
  static String assignRoute="${baseUrl}assign/assign";
  static String uploads="http://192.168.18.19:3000";
   static String notification="${baseUrl}notification";
+  static String createTicket="${baseUrl}ticket";
 
 
   static LoginData? loginData;

@@ -14,6 +14,7 @@ import 'package:help_desk_hosanna/active_screen/active_screen.dart';
 import 'package:help_desk_hosanna/active_screen/components/admin_activity_screen_card.dart';
 import 'package:help_desk_hosanna/completed_screen/completed_screen.dart';
 import 'package:help_desk_hosanna/controllers/ticket_controller.dart';
+import 'package:help_desk_hosanna/knowledge_screen/knowledge_screen.dart';
 import 'package:help_desk_hosanna/logs_screen/logs_screen.dart';
 import 'package:help_desk_hosanna/pending_screen/pending_screen.dart';
 import 'package:help_desk_hosanna/reimbursement_screen/reimbursement_screen.dart';
@@ -98,7 +99,7 @@ String _getFormattedDate() {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 8,
+      length: 9,
       child: Scaffold(
          backgroundColor: Colors.grey.shade900,
         appBar: AppBar(
@@ -193,6 +194,10 @@ String _getFormattedDate() {
                       showBadge: false,
                       badgeContent: Text('3'),
                       child: Tab(text: "Admin Activity")),
+                     badges.Badge(
+                      showBadge: true,
+                      badgeContent: Text('${ticketController.knowledgeList.value.ticketDetails?.length??0}'),
+                      child: Tab(text: "Knowledge")),
                       Obx(()=>
                      badges.Badge(
                       showBadge: ticketController.rejectedTicketList.value.ticketDetails?.length!=0? true:false,
@@ -228,6 +233,7 @@ String _getFormattedDate() {
                         RespondedScreen(),
                           CompletedScreen(),
                           PendingScreen(),
+                          KnowledgeScreen(),
                            RejectionScreen(),
                             TrainingScreen(),
                              ReimbursementScreen(),

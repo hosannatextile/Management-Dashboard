@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:help_desk_hosanna/Api/api_constant.dart';
+import 'package:help_desk_hosanna/main.dart';
 import 'package:http/http.dart' as http;
 class TicketApi{
  List<String> _validRights = ['View', 'Forward', 'Power'];
@@ -238,5 +240,33 @@ Future<http.Response> getAdminActivity() async {
   }
 }
 
+Future<Map<String, dynamic>> updateTicketStatus({
+    required String ticketId,
+    required String userId,
+    required String recipientId,
+    required String status,
+  }) async {
+    final url = Uri.parse('${ApiConstant.createTicket}/update-status');
+
+    final response = await http.patch(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'ticket_id': ticketId,
+        'user_id': userId,
+        'recipient_id': recipientId,
+        'status': status,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      
+      ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(SnackBar(content: Text('Ticket status updated successfully')));
+      return jsonDecode(response.body);
+    } else {
+        ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(SnackBar(content: Text('Ticket status update failed')));
+      throw Exception('Failed to update ticket status: ${response.body}');
+    }
+  }
 
 }
