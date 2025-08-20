@@ -42,15 +42,15 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Slider(
-          activeColor: Colors.yellow,
-          value: position.inSeconds.toDouble(),
-          max: duration.inSeconds.toDouble() > 0 ? duration.inSeconds.toDouble() : 1,
-          onChanged: (value) async {
-            final newPos = Duration(seconds: value.toInt());
-            await _player.seek(newPos);
-          },
-        ),
+        // Slider(
+        //   activeColor: Colors.yellow,
+        //   value: position.inSeconds.toDouble(),
+        //   max: duration.inSeconds.toDouble() > 0 ? duration.inSeconds.toDouble() : 1,
+        //   onChanged: (value) async {
+        //     final newPos = Duration(seconds: value.toInt());
+        //     await _player.seek(newPos);
+        //   },
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

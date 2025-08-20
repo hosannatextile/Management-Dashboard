@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:help_desk_hosanna/Api/api_constant.dart';
 import 'package:help_desk_hosanna/controllers/ticket_controller.dart';
 import 'package:help_desk_hosanna/knowledge_screen/audio_player_widget.dart';
+import 'package:help_desk_hosanna/knowledge_screen/image_dialog.dart';
 import 'package:help_desk_hosanna/knowledge_screen/video_player_widget.dart';
 
 class KnowledgeScreen extends StatefulWidget {
@@ -124,43 +125,68 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
                           ],
                         ),
                        ticketController.knowledgeList.value.ticketDetails?[index].ticket?.media!=null ?
-                        Row(children:[
-                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.imageUrl!=null ?Expanded(
-                            flex: 2,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 200,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage("${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.imageUrl!.split("/").last}"),
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                ),
-                              ),
-                            ),):Container(),
-                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.videoUrl!=null ?Expanded(
-                            flex: 2,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 100,
-                                width: 100,
-                                
-                                child: VideoPlayerWidget(url:"${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.videoUrl!.split("/").last}" ,),
-                              ),
-                            ),):Container(),
-                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.voiceNoteUrl!=null ?Expanded(
-                            flex: 2,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 100,
-                                width: 100,
-                                child: AudioPlayerWidget(url: "${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.voiceNoteUrl!.split("/").last}",),
-                              ),
-                            ),):Container()
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:[
+                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.imageUrl!=null ?Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:IconButton(onPressed: (){
+                                showDialog(
+                          context: context,
+                          builder: (_) => ImageSliderDialog(
+                            imageUrl:
+                                '${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.imageUrl!.split("/").last}',
+                            isFile: false,
+                          ),
+                                                    );
+                            }, icon: Icon(Icons.image,color: Colors.white,),iconSize: 50,),
+                            
+                            
+                          ):Container(),
+                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.videoUrl!=null ?Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconButton(
+                              icon: Icon(Icons.play_arrow),
+                              iconSize: 50,
+                              color: Colors.white,
+                              onPressed: () {
+                                //return dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        VideoPlayerWidget(
+                                          url: "${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.videoUrl!.split("/").last}",
+                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.close,
+                                              color: Colors.white,
+                                            ),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            )
+                          ):Container(),
+                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.voiceNoteUrl!=null ?Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                             
+                              child: AudioPlayerWidget(url: "${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.voiceNoteUrl!.split("/").last}",),
+                            ),
+                          ):Container()
                         ])
                         :SizedBox(),
                        
