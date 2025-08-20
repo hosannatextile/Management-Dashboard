@@ -89736,7 +89736,7 @@ A.Ob.prototype={
 L(a){return new A.Dw(new A.aeS(),!0,!0,B.Tq,null)}}
 A.aeS.prototype={
 $2(a,b){var s=null
-return new A.qP($.aBq(),new A.Bv(s),"Flutter Demo",A.wE(s,A.aFY(B.ai,s,s,B.OI),s),!1,s)},
+return new A.qP($.aBq(),new A.Bv(s),"Management Dashboard",A.wE(s,A.aFY(B.ai,s,s,B.OI),s),!1,s)},
 $S:549}
 A.Cm.prototype={
 aa(){return new A.WH(A.kv($.f1(),A.kY(),t.Xf))}}

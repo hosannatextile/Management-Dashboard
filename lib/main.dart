@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       
         navigatorKey: navigatorKey,
-      title: 'Flutter Demo',
+      title: 'Management Dashboard',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
       
