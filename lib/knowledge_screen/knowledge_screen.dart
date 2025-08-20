@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:help_desk_hosanna/Api/api_constant.dart';
 import 'package:help_desk_hosanna/controllers/ticket_controller.dart';
+import 'package:help_desk_hosanna/knowledge_screen/audio_player_widget.dart';
+import 'package:help_desk_hosanna/knowledge_screen/video_player_widget.dart';
 
 class KnowledgeScreen extends StatefulWidget {
   const KnowledgeScreen({super.key});
@@ -91,32 +93,77 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
                   margin: EdgeInsets.all(8),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    child: Column(
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.description}',style: const TextStyle(color: Colors.white)),),
-                        Expanded(
-                          flex: 3,
-                          child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.type}',style: const TextStyle(color: Colors.white)),),
-                        Expanded(
-                          flex: 3,
-                          child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.priority}',style: const TextStyle(color: Colors.white))),
-                        Expanded(
-                          flex: 2,
-                          child: Text('${ticketController.knowledgeList.value.ticketDetails![index].sender!.fullName}',style: const TextStyle(color: Colors.white))),
-                        Expanded(
-                        flex: 2,
-                          child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.createdAt!.split("T")[0]}',style: const TextStyle(color: Colors.white),textAlign: TextAlign.center,)),
-
-                          Expanded(
-                          flex: 2,
-                          child: Checkbox(value: ticketController.knowledgeList.value.ticketDetails![index].ticket!.status=="Seen" ? true : false, onChanged: (value){
-                            ticketController.updateTicketStatus(ticketController.knowledgeList.value.ticketDetails![index].ticket!.sId!,ticketController.knowledgeList.value.ticketDetails![index].sender!.sId!,ApiConstant.loginData!.user!.id!, "Seen",);
-                            ticketController.getAllTickets();
-                            ticketController.update();
-                          }),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.description}',style: const TextStyle(color: Colors.white)),),
+                            Expanded(
+                              flex: 3,
+                              child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.type}',style: const TextStyle(color: Colors.white)),),
+                            Expanded(
+                              flex: 3,
+                              child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.priority}',style: const TextStyle(color: Colors.white))),
+                            Expanded(
+                              flex: 2,
+                              child: Text('${ticketController.knowledgeList.value.ticketDetails![index].sender!.fullName}',style: const TextStyle(color: Colors.white))),
+                            Expanded(
+                            flex: 2,
+                              child: Text('${ticketController.knowledgeList.value.ticketDetails![index].ticket!.createdAt!.split("T")[0]}',style: const TextStyle(color: Colors.white),textAlign: TextAlign.center,)),
+                        
+                              Expanded(
+                              flex: 2,
+                              child: Checkbox(value: ticketController.knowledgeList.value.ticketDetails![index].ticket!.status=="Seen" ? true : false, onChanged: (value){
+                                ticketController.updateTicketStatus(ticketController.knowledgeList.value.ticketDetails![index].ticket!.sId!,ticketController.knowledgeList.value.ticketDetails![index].sender!.sId!,ApiConstant.loginData!.user!.id!, "Seen",);
+                                ticketController.getAllTickets();
+                                ticketController.update();
+                              }),),
+                          ],
+                        ),
+                       ticketController.knowledgeList.value.ticketDetails?[index].ticket?.media!=null ?
+                        Row(children:[
+                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.imageUrl!=null ?Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 200,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage("${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.imageUrl!.split("/").last}"),
+                                    fit: BoxFit.fitHeight,
+                                  ),
+                                ),
+                              ),
+                            ),):Container(),
+                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.videoUrl!=null ?Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 100,
+                                width: 100,
+                                
+                                child: VideoPlayerWidget(url:"${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.videoUrl!.split("/").last}" ,),
+                              ),
+                            ),):Container(),
+                          ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.voiceNoteUrl!=null ?Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 100,
+                                width: 100,
+                                child: AudioPlayerWidget(url: "${ApiConstant.baseUrl}ticket/getmedia/${ticketController.knowledgeList.value.ticketDetails![index].ticket!.media!.voiceNoteUrl!.split("/").last}",),
+                              ),
+                            ),):Container()
+                        ])
+                        :SizedBox(),
+                       
                       ],
                     ),
                   ),
