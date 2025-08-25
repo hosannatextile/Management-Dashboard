@@ -63,7 +63,7 @@ class _ProblemScreenCardState extends State<ProblemScreenCard> {
               role: ticket.sender?.role ?? "Unknown",
               date: ticket.ticket?.createdAt?.split("T").first ?? "No Date",
               priority: ticket.ticket?.priority ?? "Unknown",
-              media:ticket.ticket!.media!,
+              media:ticket.ticket?.media??Media(),
               profilePhoto: ticket.sender?.profilePhoto ?? "",
                      ticketId: ticket.ticket!.sId!,
             ),
