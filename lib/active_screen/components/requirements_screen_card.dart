@@ -64,7 +64,7 @@ class _RequirementScreenCardState extends State<RequirementScreenCard> {
               role: ticket.sender?.role ?? "Unknown",
               date: ticket.ticket?.createdAt?.split("T").first ?? "",
               priority: ticket.ticket?.priority ?? "",
-              media:ticket.ticket!.media!,
+              media:ticket.ticket?.media??Media(),
               profilePhoto: ticket.sender?.profilePhoto ?? "",
             ticketId: ticket.ticket!.sId!,
             ),

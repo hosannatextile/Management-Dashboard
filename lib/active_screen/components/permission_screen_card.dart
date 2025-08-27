@@ -63,7 +63,7 @@ class _PermissionScreenCardState extends State<PermissionScreenCard> {
               role: ticket.sender?.role ?? "Unknown",
               date: ticket.ticket?.createdAt?.split("T").first ?? "",
               priority: ticket.ticket?.priority ?? "N/A",
-              media:ticket.ticket!.media!,
+              media:ticket.ticket?.media??Media(),
               profilePhoto: ticket.sender?.profilePhoto ?? "",
              ticketId: ticket.ticket!.sId!,
             ),
