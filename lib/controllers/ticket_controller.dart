@@ -93,7 +93,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       complaintsList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      complaintsList.value.ticketDetails=complaintsList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
+      complaintsList.value.ticketDetails=complaintsList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Responded" ).toList().obs;
       loadingComplaints.value = false;
       print(complaintsList().count);
     }
@@ -105,7 +105,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       permissionList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      permissionList.value.ticketDetails=permissionList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
+      permissionList.value.ticketDetails=permissionList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Responded").toList().obs;
       loadingPermissions.value = false;
       print(permissionList().count);
     }
@@ -117,7 +117,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       problemList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      problemList.value.ticketDetails=problemList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
+      problemList.value.ticketDetails=problemList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Responded").toList().obs;
       loadingProblems.value = false;
       print(problemList().count);
     }
@@ -129,7 +129,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       requirementList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      requirementList.value.ticketDetails=requirementList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
+      requirementList.value.ticketDetails=requirementList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Responded").toList().obs;
       loadingRequirements.value = false;
       print(requirementList().count);
     }
@@ -140,7 +140,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       trainingList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      trainingList.value.ticketDetails=trainingList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
+      trainingList.value.ticketDetails=trainingList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Responded").toList().obs;
       print(trainingList().count);
     }
   }
@@ -150,7 +150,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       reimbursementList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      reimbursementList.value.ticketDetails=reimbursementList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign").toList().obs;
+      reimbursementList.value.ticketDetails=reimbursementList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Responded").toList().obs;
       print(reimbursementList().count);
     }
   }
@@ -160,7 +160,7 @@ getAllComplaints() async {
     );
     if (response.statusCode == 200) {
       knowledgeList = TicketsCompleteData.fromJson(jsonDecode(response.body)).obs;
-      knowledgeList.value.ticketDetails=knowledgeList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Seen").toList().obs;
+      knowledgeList.value.ticketDetails=knowledgeList.value.ticketDetails!.reversed.where((x) => x.ticket!.status != "completed" && x.ticket!.status != "Reject" && x.ticket!.status != "Assign" && x.ticket!.status != "Seen" && x.ticket!.status != "Responded").toList().obs;
       print(reimbursementList().count);
     }
   }
